@@ -1,0 +1,23 @@
+driver:
+  name: docker
+  use_sudo: true
+
+provisioner:
+  name: chef_zero
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: ubuntu-14.04
+  - name: centos-6.9
+  - name: centos-7.3
+
+suites:
+  - name: default
+    run_list:
+      - recipe[baseline::default]
+    verifier:
+      inspec_tests:
+        - test/recipes
+    attributes:
